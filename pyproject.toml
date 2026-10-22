@@ -1,0 +1,67 @@
+[project]
+name = "haas-asr"
+version = "0.1.0"
+description = "Inference code for the Haas speech recognition models"
+readme = "README.md"
+license = "Apache-2.0"
+license-files = ["LICENSE"]
+requires-python = ">=3.10"
+dependencies = [
+    # Tested version. NeMo's decoder-state helpers and its hydra target
+    # allowlist are private API, so the upper bound stays tight.
+    "nemo-toolkit[asr]>=2.7.3,<2.8",
+    # Pinned exactly and checked again at import (haas_asr._fla): its layer
+    # APIs change between releases, and a kernel that is silently different
+    # is worse than an error.
+    "flash-linear-attention==0.5.2",
+    "numpy",
+    "soundfile",
+    "librosa",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "ruff>=0.6",
+    "pre-commit>=3.7",
+]
+# The browser demos in demos/ (run from a clone: uv sync --group demo).
+demo = [
+    "fastapi>=0.110",
+    # Plain uvicorn with its pure-Python backends, h11 for HTTP and wsproto for
+    # WebSockets: the httptools backend of uvicorn 0.54 + httptools 0.8 writes a
+    # malformed status line, the websockets backend is deprecated, and the
+    # websockets-sansio backend did not complete handshakes behind h11.
+    "uvicorn>=0.29",
+    "wsproto>=1.2",
+]
+# examples/evaluate_asr_ja_bench.py: jacer scores the benchmark (metrics v1.2,
+# the version the model card reports).
+eval = [
+    "jacer @ git+https://github.com/third-intelligence/jacer.git@b861959fe0a8f67f47c848d19c1a9cb8a32e1c2e",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/haas_asr"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]  # so tests can import demos/
+
+[tool.uv]
+# Write all bytecode at install time. NeMo 2.7.3's CUDA-graph decoder writes a NUL
+# into Python's shared b" " object when its module is compiled at run time, and
+# any module compiled after that (uvicorn's, in the demos) caches the corrupted
+# constant in its .pyc, which breaks every later WebSocket handshake.
+compile-bytecode = true

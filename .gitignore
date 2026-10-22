@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+
+# Model files: published on Hugging Face, never in git
+*.nemo
+*.ckpt
+*.pt
+*.safetensors
+
+# Audio and video: host elsewhere and link from the README
+*.wav
+*.flac
+*.mp3
+*.m4a
+*.ogg
+*.opus
+*.mp4
+*.mov
+*.webm
+
+# Local outputs
+outputs/
+*.log
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/

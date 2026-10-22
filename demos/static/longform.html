@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Haas-ja-v1.0 · 長時間音声の書き起こしデモ</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+JP:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="/static/style.css" />
+    <link rel="icon" href="data:," />
+  </head>
+  <body>
+    <div class="page">
+      <header>
+        <div>
+          <div class="brand">Haas-ja-v1.0</div>
+          <h1 data-t="title">長時間音声の書き起こしデモ</h1>
+        </div>
+        <nav>
+          <a href="/longform" aria-current="page" data-t="navLongform">長時間音声</a>
+          <a href="/realtime" data-t="navRealtime">リアルタイム</a>
+        </nav>
+        <div class="status" id="status"><i></i><span>…</span></div>
+      </header>
+
+      <div class="source">
+        <button class="chip primary" id="pick" data-t="pick">音声ファイルを選択…</button>
+        <input type="file" id="file" accept="audio/*" hidden />
+        <span class="phase" id="filename"></span>
+        <span class="spacer"></span>
+        <span class="label" data-t="batch">バッチ</span>
+        <select class="select" id="batch" aria-label="batch size">
+          <option value="1">1</option><option value="4">4</option><option value="16">16</option>
+          <option value="32">32</option><option value="64" selected>64</option>
+        </select>
+      </div>
+
+      <section class="stage">
+        <div class="stats">
+          <div class="stat"><div class="k" data-t="audioLen">音声の長さ</div><div class="v" id="s-audio">–</div></div>
+          <div class="stat"><div class="k" data-t="elapsed">処理時間</div><div class="v"><span id="s-elapsed">–</span><small>s</small></div></div>
+        </div>
+        <div class="wave">
+          <canvas id="wave"></canvas>
+          <div class="axis" id="axis"></div>
+        </div>
+        <div class="caption">
+          <button class="play" id="play" disabled aria-label="play"><i></i></button>
+          <span class="ptime" id="ptime"></span>
+          <span class="phase" id="phase"></span>
+          <span class="headline" id="headline"></span>
+        </div>
+      </section>
+
+      <div class="transcript" id="transcript"><div class="hint" data-t="empty">音声ファイルを選ぶか、ここにドロップすると書き起こしが表示されます</div></div>
+      <audio id="player" preload="metadata"></audio>
+    </div>
+    <script type="module" src="/static/longform.js"></script>
+  </body>
+</html>
