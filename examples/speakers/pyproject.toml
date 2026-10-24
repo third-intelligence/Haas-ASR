@@ -1,0 +1,26 @@
+[project]
+name = "haas-asr-speakers-example"
+version = "0.1.0"
+description = "Example: Haas combined with NVIDIA's Nemotron-3-Diarization for speaker-labelled transcripts"
+# The Python version this example was tested with on NeMo's main branch.
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "haas-asr",
+    "nemo-toolkit[asr]",
+]
+
+[tool.uv.sources]
+haas-asr = { path = "../..", editable = true }
+# Nemotron-3-Diarization needs a NeMo newer than the 2.7 that haas-asr pins: NeMo's main
+# branch at a pinned commit, until a release includes the model.
+nemo-toolkit = { git = "https://github.com/NVIDIA/NeMo", rev = "218d0b443441b7d8aa1c832f47df310f186cf0a4" }
+
+[tool.uv]
+package = false
+# See the main pyproject.toml: NeMo's CUDA-graph decoder corrupts bytecode compiled later.
+compile-bytecode = true
+# haas-asr pins nemo-toolkit<2.8 for its own environment; this example runs it on the
+# newer NeMo above.
+override-dependencies = [
+    "nemo-toolkit[asr] @ git+https://github.com/NVIDIA/NeMo@218d0b443441b7d8aa1c832f47df310f186cf0a4",
+]

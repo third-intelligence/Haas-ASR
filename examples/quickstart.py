@@ -1,6 +1,6 @@
 """Transcribe short audio files (up to about 30 s each; any sample rate, mono or stereo).
 
-python examples/quickstart.py --model <hf-id-or-.nemo> audio1.wav audio2.wav
+python examples/quickstart.py --model <hf-id-or-.nemo> example1.wav example2.wav
 """
 
 import argparse

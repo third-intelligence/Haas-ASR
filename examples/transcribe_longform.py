@@ -3,7 +3,7 @@
 Audio longer than 30 s is cut at quiet points and the chunks are transcribed in
 batches; shorter audio is transcribed in one piece.
 
-python examples/transcribe_longform.py --model <hf-id-or-.nemo> lecture.flac
+python examples/transcribe_longform.py --model <hf-id-or-.nemo> example.flac
 """
 
 import argparse

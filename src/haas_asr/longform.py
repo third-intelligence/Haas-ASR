@@ -10,6 +10,8 @@ from __future__ import annotations
 import numpy as np
 
 from haas_asr.audio import SAMPLE_RATE
+from haas_asr.transcription import transcribe
+from haas_asr.vocabulary import Vocabulary
 
 CHUNK_SECONDS = 30.0
 SEARCH_SECONDS = 2.0
@@ -63,6 +65,8 @@ def transcribe_longform(
     *,
     batch_size: int = 64,
     separator: str = "",
+    vocabulary: Vocabulary | None = None,
+    guard: bool = True,
     **split_kwargs,
 ) -> str:
     """Transcribe audio of any length and join the chunk texts.
@@ -70,11 +74,12 @@ def transcribe_longform(
     `audio` is mono float32 at the model's sample rate (see
     ``haas_asr.audio.load_audio``); `split_kwargs` go to
     ``split_at_quiet_points``. Japanese text has no word spaces, hence the
-    empty default `separator`.
+    empty default `separator`. `vocabulary` and `guard` are as in
+    ``haas_asr.transcribe``.
 
     Changing `batch_size` can flip a few near-tie tokens (different GPU
     kernels for different shapes), so fix it when comparing runs.
     """
     chunks = [audio[start:end] for start, end in split_at_quiet_points(audio, **split_kwargs)]
-    hypotheses = model.transcribe(chunks, batch_size=batch_size, verbose=False)
-    return separator.join(h.text.strip() for h in hypotheses)
+    texts = transcribe(model, chunks, batch_size=batch_size, vocabulary=vocabulary, guard=guard)
+    return separator.join(texts)

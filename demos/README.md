@@ -8,7 +8,7 @@ Two browser demos that run on your own GPU, served by one local web server:
   that fills in as chunks finish, and a timestamped transcript you can click to play
   from. The server reads the file with libsndfile, which accepts WAV, FLAC, MP3 and
   OGG (Vorbis or Opus) but not M4A, MP4 or WebM; convert those first, for example
-  with `ffmpeg -i recording.m4a recording.flac`.
+  with `ffmpeg -i example.m4a example.flac`.
 - **Real-time** (`/realtime`): speak into the microphone, or play an audio file, and
   see captions as you speak, with the end-to-end delay. Files are decoded by the
   browser, so any format it can play works.
