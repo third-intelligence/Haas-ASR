@@ -44,7 +44,7 @@ shows how to reproduce the Haas-ja-v1.0 results.
 - Linux with an NVIDIA GPU. The decoder's attention kernels come from
   [flash-linear-attention](https://github.com/fla-org/flash-linear-attention),
   which needs Triton and CUDA, so CPU and macOS are not supported.
-- Python 3.10+, NeMo 2.7.
+- Python 3.11+, NeMo 2.7.
 - The speaker-label example has its own environment, with Python 3.12 and a newer NeMo.
   It is created in `examples/speakers/` the first time you run the example and leaves
   the default environment unchanged.

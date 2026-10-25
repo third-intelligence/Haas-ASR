@@ -5,7 +5,7 @@ description = "Inference code for the Haas speech recognition models"
 readme = "README.md"
 license = "Apache-2.0"
 license-files = ["LICENSE"]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 dependencies = [
     # Tested version. NeMo's decoder-state helpers and its hydra target
     # allowlist are private API, so the upper bound stays tight.
@@ -50,7 +50,7 @@ packages = ["src/haas_asr"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py310"
+target-version = "py311"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "B", "UP"]
@@ -65,3 +65,17 @@ pythonpath = ["."]  # so tests can import demos/
 # any module compiled after that (uvicorn's, in the demos) caches the corrupted
 # constant in its .pyc, which breaks every later WebSocket handshake.
 compile-bytecode = true
+# Versions with known security fixes, above the pins in NeMo 2.7.3's metadata and in
+# lightning 2.4.0's (fsspec, packaging), and a floor for virtualenv (dev tools, via
+# pre-commit); transcripts are unchanged on the benchmark.
+# transformers 5 also brings huggingface-hub 2. lightning stays at NeMo's 2.4.0: with
+# its fixed 2.6.6, NeMo 2.7.3's nv-one-logger hook raises a TypeError at model load.
+# These apply to `uv sync` in this repository only: a project that installs haas-asr
+# as a dependency gets NeMo's pins unless it sets the same overrides.
+override-dependencies = [
+    "fsspec[http]>=2026.6.0",
+    "hydra-core>=1.3.6",
+    "packaging>=26.3",
+    "transformers>=5.10.0",
+    "virtualenv>=21.14.9",
+]
