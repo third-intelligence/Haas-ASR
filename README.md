@@ -25,8 +25,8 @@ In each cell, the top value is CER strict and the bottom values are CER flex / k
 
 Among open models, Haas-ja-v1.0 is on the Pareto frontier of speed and accuracy. It
 runs at almost the same speed as Parakeet (RTFx 3,236 vs. 3,407) while cutting CER
-strict by about 1.1 points, and is about 10–15 times faster than Whisper large-v3 and
-Qwen3-ASR 1.7B, the next most accurate open models.
+strict by about 1.1 points, and is about 15–17 times faster than Nemotron 3.5
+Transcribe and Whisper large-v3, the next most accurate open models.
 
 ![CER strict against RTFx / Speed Factor for all models](assets/cer_vs_rtfx.png)
 
