@@ -197,7 +197,7 @@ uv run python -m demos.app      # then open http://localhost:7860
 
 See [`demos/README.md`](demos/README.md) for options and how the real-time demo works.
 These are simple versions to run locally; the
-[Hugging Face Space](https://huggingface.co/spaces/third-intelligence/Haas-ja-v1.0) also
+[Hugging Face Space](https://third-intelligence-haas-ja-v1-0.hf.space/longform) also
 has the custom vocabulary and speaker labels.
 
 ## Acknowledgements
