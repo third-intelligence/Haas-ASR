@@ -1,7 +1,7 @@
 # Haas-ASR
 
 <p align="center">
-  🤗 <a href="https://huggingface.co/third-intelligence/Haas-ja-v1.0">Model</a>&nbsp;&nbsp;|&nbsp;&nbsp;📑 <a href="TODO-blog-url">Blog</a>&nbsp;&nbsp;|&nbsp;&nbsp;📊 <a href="https://huggingface.co/datasets/third-intelligence/asr-ja-bench">Benchmark</a>&nbsp;&nbsp;|&nbsp;&nbsp;📏 <a href="https://github.com/third-intelligence/jacer">jacer</a>
+  🤗 <a href="https://huggingface.co/third-intelligence/Haas-ja-v1.0">Model</a>&nbsp;&nbsp;|&nbsp;&nbsp;📑 <a href="https://third-intelligence.com/ja/posts/haas-ja-v1-release">Blog</a>&nbsp;&nbsp;|&nbsp;&nbsp;📊 <a href="https://huggingface.co/datasets/third-intelligence/asr-ja-bench">Benchmark</a>&nbsp;&nbsp;|&nbsp;&nbsp;📏 <a href="https://github.com/third-intelligence/jacer">jacer</a>
 </p>
 
 Inference code for the **Haas** speech recognition models. The first release,
@@ -36,7 +36,7 @@ GPT-Transcribe, which has similar accuracy.
 ![CER strict against inference cost per hour of audio](assets/cer_vs_cost.png)
 
 For the evaluation details, including the benchmark design, the CER metrics and the
-full results, see the [blog post](TODO-blog-url). [Evaluation](#evaluation) below
+full results, see the [blog post](https://third-intelligence.com/ja/posts/haas-ja-v1-release). [Evaluation](#evaluation) below
 shows how to reproduce the Haas-ja-v1.0 results.
 
 ## Requirements
