@@ -43,7 +43,8 @@ shows how to reproduce the Haas-ja-v1.0 results.
 
 - Linux with an NVIDIA GPU. The decoder's attention kernels come from
   [flash-linear-attention](https://github.com/fla-org/flash-linear-attention),
-  which needs Triton and CUDA, so CPU and macOS are not supported.
+  which needs Triton and CUDA. The CPU also works, more slowly
+  (see [Running on the CPU](#running-on-the-cpu)).
 - Python 3.11+, NeMo 2.7.
 - The speaker-label example has its own environment, with Python 3.12 and a newer NeMo.
   It is created in `examples/speakers/` the first time you run the example and leaves
@@ -91,6 +92,16 @@ resamples it to 16 kHz, the model's input. `load_model` returns a regular NeMo
 `ASRModel`, so everything in NeMo's ASR API works on it. To use
 `ASRModel.from_pretrained` yourself, `import haas_asr` first so that NeMo can build
 the custom decoder.
+
+## Running on the CPU
+
+```python
+model = haas_asr.load_model("third-intelligence/Haas-ja-v1.0", device="cpu")
+```
+
+On the CPU, the decoder uses a pure-PyTorch port of flash-linear-attention's layer.
+To choose it yourself, pass `kda_backend="fla"` or `"torch"` (default `"auto"`), or set
+`HAAS_KDA_BACKEND`.
 
 ## Long-form audio
 

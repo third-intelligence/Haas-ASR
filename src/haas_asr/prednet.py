@@ -2,7 +2,7 @@
 
 ``KDATransducerDecoder`` replaces the LSTM stack inside NeMo's
 ``RNNTDecoder`` with pre-norm residual blocks of Kimi Delta Attention (KDA)
-from flash-linear-attention:
+from flash-linear-attention (or its PyTorch port, see ``haas_asr._kda``):
 
     x = x + dropout(kda(norm(x)))
 
@@ -43,7 +43,7 @@ import torch
 from nemo.collections.asr.modules.rnnt import RNNTDecoder
 from torch import nn
 
-from haas_asr._fla import load_kda_class
+from haas_asr._kda import load_kda_class
 
 # Prefix of this module's keys in ``model.decoder.prednet``.
 CONFIG_PREFIX = "kda_"
